@@ -11,7 +11,8 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await login({ email, password });
+      const user = await login({ email, password });
+      console.log(user);
       navigate("/dashboard");
     } catch (error) {
       alert("Invalid Credentials");
