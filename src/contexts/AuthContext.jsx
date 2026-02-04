@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { getCurrentUser, loginUser, logoutUser } from "../services/user.api";
+import axiosInstance from "../api/axios";
 
 const AuthContext = createContext();
 
@@ -30,6 +31,8 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     await logoutUser();
+    localStorage.removeItem("accessToken");
+    delete axiosInstance.defaults.headers.common["Authorization"];
     setUser(null);
   };
 
